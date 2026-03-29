@@ -1,0 +1,520 @@
+/* Переменные для страницы настроек */
+:root {
+    --bg-page: #0f0f0f;
+    --bg-card: #1e1e1e;
+    --bg-input: #0f0f0f; 
+    --bg-modal: #282828;
+    
+    --text-hint: #777777;
+
+    --accent-color: #3ea6ff;
+    --accent-hover: #65b8ff;
+    --accent-bg-soft: rgba(62, 166, 255, 0.1);
+
+    --danger-color: #ff5252;
+    --danger-hover: #ff1744;
+    --danger-bg-soft: rgba(255, 82, 82, 0.15);
+    --danger-border: rgba(255, 82, 82, 0.3);
+
+    --border-input: #3f3f3f;
+    --border-soft: rgba(255, 255, 255, 0.08);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-btn: 20px;
+}
+
+/* Макет */
+.settings-modern-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+    color: var(--text-primary);
+}
+
+.settings-page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.settings-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Сайдбар настроек */
+.settings-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    flex-shrink: 0;
+    gap: 4px;
+}
+
+.st-nav-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.st-nav-item:hover {
+    background-color: var(--border-soft);
+    color: var(--text-primary);
+}
+
+.st-nav-item.active {
+    background-color: var(--accent-bg-soft);
+    color: var(--accent-color);
+}
+
+.st-nav-item.danger:hover {
+    background-color: rgba(255, 82, 82, 0.1);
+    color: var(--danger-color);
+}
+
+.st-nav-item.danger.active {
+    background-color: var(--danger-bg-soft);
+    color: var(--danger-color);
+}
+
+/* Контентная область */
+.settings-content-area {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.st-tab-content { 
+    display: none; 
+}
+
+.st-tab-content.active { 
+    display: block; 
+    animation: fadeIn 0.3s ease; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Карточки настроек */
+.st-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px 32px;
+    margin-bottom: 24px;
+}
+
+.st-card.danger-card {
+    border-color: var(--danger-border);
+    background-color: rgba(255, 82, 82, 0.05);
+}
+
+.st-card-header {
+    margin-bottom: 24px;
+}
+
+.st-card-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.st-card-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.st-hint {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 0;
+}
+
+/* Формы и поля ввода */
+.st-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.form-group-material {
+    position: relative;
+    margin: 0; 
+}
+
+.form-group-material input {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+    padding: 24px 16px 8px 16px; 
+    transition: border-color 0.2s ease;
+    outline: none;
+    line-height: 1.5;
+}
+
+.form-group-material input:focus {
+    border-color: var(--accent-color);
+    border-width: 2px;
+    padding: 23px 15px 7px 15px;
+}
+
+.form-group-material.has-error input {
+    border-color: var(--danger-color);
+}
+
+.form-group-material label {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+
+.form-group-material input:focus + label,
+.form-group-material input:not(:placeholder-shown) + label {
+    transform: translateY(-12px) scale(0.75);
+    color: var(--accent-color);
+}
+
+.form-group-material.has-error input:focus + label,
+.form-group-material.has-error input:not(:placeholder-shown) + label {
+    color: var(--danger-color);
+}
+
+.input-error-message {
+    display: none;
+    color: var(--danger-color);
+    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 16px;
+}
+
+.form-group-material.has-error .input-error-message {
+    display: block;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.st-row-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Визитка канала */
+.channel-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 24px;
+}
+
+.channel-card-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+
+.channel-card-avatar img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.channel-card-info { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.channel-card-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.channel-card-meta {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.channel-card-actions { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.channel-features-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    margin-top: 16px; 
+}
+
+.feature-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+}
+
+.feature-text { 
+    font-size: 14px; 
+}
+
+/* Переключатели (Toggles) */
+.st-option-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.st-option-row:last-child { 
+    border-bottom: none; 
+}
+
+.st-label { 
+    display: block; 
+    font-size: 15px; 
+    font-weight: 500; 
+    margin-bottom: 4px; 
+}
+
+.st-sublabel { 
+    font-size: 13px; 
+    color: var(--text-secondary); 
+}
+
+.toggle-switch {
+    position: relative;
+    width: 46px; 
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input { 
+    display: none; 
+}
+
+.slider {
+    position: absolute; 
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #444;
+    transition: .3s; 
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute; 
+    content: "";
+    height: 18px; 
+    width: 18px;
+    left: 4px; 
+    bottom: 4px;
+    background-color: white;
+    transition: .3s; 
+    border-radius: 50%;
+}
+
+input:checked + .slider { 
+    background-color: var(--accent-color); 
+}
+
+input:checked + .slider:before { 
+    transform: translateX(20px); 
+}
+
+/* Кнопки настроек */
+.st-btn {
+    padding: 10px 24px;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.st-btn:active { 
+    transform: scale(0.98); 
+}
+
+.st-btn.primary { 
+    background-color: var(--accent-color); 
+    color: #0f0f0f; 
+}
+
+.st-btn.primary:hover { 
+    background-color: var(--accent-hover); 
+}
+
+.st-btn.secondary { 
+    background-color: transparent; 
+    border: 1px solid var(--border-input); 
+    color: var(--text-primary); 
+}
+
+.st-btn.secondary:hover { 
+    background-color: var(--border-soft); 
+}
+
+.st-btn.secondary-light { 
+    background-color: #2a2a2a; 
+    color: var(--accent-color); 
+}
+
+.st-btn.secondary-light:hover { 
+    background-color: #333; 
+}
+
+.st-btn.danger { 
+    background-color: var(--danger-color); 
+    color: #fff; 
+}
+
+.st-btn.danger:hover { 
+    background-color: var(--danger-hover); 
+}
+
+/* Модальные окна настроек и капча */
+.st-modal-overlay {
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    display: none;
+    justify-content: center; 
+    align-items: center;
+    z-index: 9999;
+}
+
+.st-modal-overlay.active { 
+    display: flex; 
+}
+
+.st-modal {
+    background: var(--bg-modal);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    width: 90%; 
+    max-width: 420px;
+    border: 1px solid var(--border-input);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop { 
+    from { transform: scale(0.95); opacity: 0; } 
+    to { transform: scale(1); opacity: 1; } 
+}
+
+.st-modal.danger { 
+    border-top: 4px solid var(--danger-color); 
+}
+
+.st-modal-actions { 
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 12px; 
+    margin-top: 24px; 
+}
+
+.captcha-container {
+    background: #151515;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.captcha-code {
+    font-family: monospace; 
+    font-size: 24px; 
+    letter-spacing: 4px;
+    color: var(--accent-color);
+    background: black; 
+    padding: 10px; 
+    border-radius: 4px; 
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+/* Адаптив настроек */
+@media (max-width: 768px) {
+    .settings-layout { 
+        flex-direction: column; 
+        gap: 24px; 
+    }
+    
+    .settings-sidebar-nav {
+        width: 100%; 
+        flex-direction: row; 
+        overflow-x: auto;
+        padding-bottom: 8px; 
+        border-bottom: 1px solid var(--border-soft);
+        scrollbar-width: none;
+    }
+    
+    .settings-sidebar-nav::-webkit-scrollbar { 
+        display: none; 
+    }
+    
+    .st-nav-item { 
+        white-space: nowrap; 
+        padding: 10px 14px; 
+    }
+    
+    .st-row-inputs { 
+        grid-template-columns: 1fr; 
+    }
+    
+    .channel-card { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    
+    .channel-card-actions { 
+        justify-content: center; 
+        flex-wrap: wrap; 
+    }
+}

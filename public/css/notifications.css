@@ -1,0 +1,46 @@
+/* --- Уведомления в шапке --- */
+.notification-container { position: relative; margin-right: 8px; }
+
+.notification-badge {
+    position: absolute; top: 2px; right: 2px;
+    background: #cc0000; color: white;
+    font-size: 10px; font-weight: bold;
+    padding: 2px 5px; border-radius: 10px;
+    border: 2px solid #212121; pointer-events: none;
+}
+
+.notification-dropdown {
+    display: none; position: absolute; top: 50px; right: -60px;
+    width: 380px; max-height: 520px;
+    background: #282828; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 1000; flex-direction: column;
+}
+.notification-dropdown.active { display: flex; }
+
+.notification-header {
+    padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.notification-header h3 { margin: 0; font-size: 16px; color: #fff; font-weight: 500; }
+
+.notification-list { overflow-y: auto; max-height: 460px; }
+
+.notification-item {
+    display: flex; gap: 14px; padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-decoration: none; color: inherit; transition: background 0.2s;
+    align-items: flex-start;
+}
+.notification-item:hover { background: rgba(255,255,255,0.05); }
+.notification-item.unread { background: rgba(62, 166, 255, 0.08); }
+.notification-item.unread::after {
+    content: ''; width: 6px; height: 6px; background: #3ea6ff;
+    border-radius: 50%; position: absolute; right: 16px; margin-top: 6px;
+}
+
+.notif-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.notif-content { flex: 1; font-size: 14px; line-height: 1.4; color: #f1f1f1; padding-right: 15px; }
+.notif-content strong { font-weight: 500; }
+.notif-time { display: block; font-size: 12px; color: #aaa; margin-top: 4px; }
+.notification-empty, .notification-loading { padding: 30px; text-align: center; color: #aaa; font-size: 14px; }

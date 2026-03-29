@@ -1,0 +1,321 @@
+/* 
+ * -------------------------------------------------------------------
+ *  1. ОСНОВНОЙ МАКЕТ И ШАПКА СТРАНИЦЫ
+ * -------------------------------------------------------------------
+ */
+
+ .liked-page-container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 24px 32px;
+    background-color: #181818;
+    border-radius: 12px;
+}
+
+.liked-page-header {
+    margin-bottom: 32px;
+}
+
+.liked-page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+}
+
+.playlist-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-button img {
+    height: 20px;
+}
+
+.action-button.play-all {
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+}
+.action-button.play-all:hover {
+    background-color: #d9d9d9;
+}
+
+.action-button.shuffle {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f1f1f1;
+}
+.action-button.shuffle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.action-button.shuffle img { 
+    filter: invert(1); 
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  2. СПИСОК ВИДЕО
+ * -------------------------------------------------------------------
+ */
+
+.liked-video-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.liked-video-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    position: relative;
+    transition: background-color 0.2s, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.liked-video-item:hover {
+    background-color: #272727;
+}
+
+.video-index {
+    font-size: 14px;
+    color: #aaa;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.video-main-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-grow: 1;
+    min-width: 0;
+    cursor: default;
+}
+
+.thumbnail-wrapper-link {
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.thumbnail-wrapper-link:hover .thumbnail-image {
+    opacity: 0.9;
+}
+
+.thumbnail-image {
+    width: 160px;
+    height: 90px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+}
+
+.thumbnail-duration {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.video-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.video-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.video-title a {
+    text-decoration: none;
+    color: #f1f1f1;
+    transition: color 0.2s;
+}
+
+.video-title a:hover {
+    color: #fff;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.video-channel-link {
+    text-decoration: none;
+    color: #aaa;
+    transition: color 0.2s;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.video-channel-link:hover {
+    color: #f1f1f1;
+}
+
+
+/* 
+ * -------------------------------------------------------------------
+ *  3. КОНТЕКСТНОЕ МЕНЮ
+ * -------------------------------------------------------------------
+ */
+
+.context-menu-container {
+    position: relative;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.context-menu-button {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.context-menu-button:hover { 
+    background-color: #3f3f3f; 
+}
+
+.context-menu-button img { 
+    width: 24px; 
+    height: 24px; 
+    filter: invert(1); 
+}
+
+.context-menu-dropdown {
+    display: none; 
+    position: absolute; 
+    top: 45px;
+    right: 8px;
+    background-color: #282828; 
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10; 
+    min-width: 250px;
+}
+.context-menu-dropdown.opens-upward {
+    top: auto;
+    bottom: 40px;
+}
+.context-menu-dropdown.active { display: block; }
+.context-menu-dropdown a {
+    display: flex; 
+    align-items: center; 
+    gap: 16px;
+    padding: 12px 16px;
+    color: #f1f1f1; 
+    text-decoration: none; 
+    font-size: 14px;
+    white-space: nowrap;
+}
+.context-menu-dropdown a:hover { 
+    background-color: #3f3f3f; 
+}
+.context-menu-dropdown a img { 
+    width: 24px; 
+    height: 24px; 
+    filter: invert(1); 
+}
+
+
+/* 
+ * ===================================================================
+ *  4. ПРОЧИЕ И АДАПТИВНЫЕ СТИЛИ
+ * ===================================================================
+ */
+
+.empty-page-placeholder {
+    text-align: center;
+    margin-top: 48px;
+    padding: 32px 0;
+}
+.empty-page-placeholder h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+.empty-page-placeholder p {
+    font-size: 16px;
+    color: #aaa;
+    line-height: 1.5;
+    margin: 0;
+}
+.empty-page-placeholder a.empty-page-button {
+    color: #0f0f0f;
+    background-color: #f1f1f1;
+    padding: 10px 24px;
+    border-radius: 18px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .liked-page-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .playlist-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .video-details {
+        gap: 4px;
+    }
+    .video-title {
+        font-size: 14px;
+    }
+    .video-meta {
+        font-size: 12px;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .video-meta span:nth-child(2),
+    .video-meta span:nth-child(4) {
+        display: none;
+    }
+    .thumbnail-image {
+        width: 120px;
+        height: 68px;
+    }
+    .liked-video-item {
+        gap: 12px;
+    }
+}

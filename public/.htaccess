@@ -1,0 +1,14 @@
+php_flag display_errors on
+php_value error_reporting 2047
+
+Options -MultiViews
+RewriteEngine On
+
+ErrorDocument 404 /404.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_URI} !^/info/
+
+RewriteRule ^(.*)$ index.php [QSA,L]

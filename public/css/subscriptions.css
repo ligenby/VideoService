@@ -1,0 +1,600 @@
+/* 
+ * -------------------------------------------------------------------
+ *  1. ОСНОВНОЙ МАКЕТ И ШАПКА СТРАНИЦЫ
+ * -------------------------------------------------------------------
+ */
+
+ .subscriptions-page-container {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 24px 32px;
+    background-color: #181818;
+    border-radius: 12px;
+}
+
+.subscriptions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 24px;
+}
+
+.subscriptions-page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  2. БЛОК ДЕЙСТВИЙ В ШАПКЕ (КНОПКИ) И МЕНЮ СОРТИРОВКИ
+ * -------------------------------------------------------------------
+ */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.view-toggle-button.styled,
+.sort-menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 18px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.view-toggle-button.styled {
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+}
+
+.view-toggle-button.styled:hover {
+    background-color: #d9d9d9;
+}
+
+.view-toggle-button.styled img {
+    height: 20px;
+    filter: none;
+}
+
+.sort-menu-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f1f1f1;
+}
+
+.sort-menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sort-menu-container {
+    position: relative;
+}
+
+.sort-arrow-icon {
+    width: 16px;
+    height: 16px;
+    filter: invert(1);
+    transition: transform 0.2s;
+}
+
+.sort-menu-container.open .sort-arrow-icon {
+    transform: rotate(180deg);
+}
+
+.sort-menu-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: #282828;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    min-width: 220px;
+}
+
+.sort-menu-dropdown.active {
+    display: block;
+}
+
+.sort-option {
+    display: block;
+    padding: 12px 16px;
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sort-option:hover {
+    background-color: #3f3f3f;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  3. РЕЖИМ "КАНАЛЫ"
+ * -------------------------------------------------------------------
+ */
+
+.channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.channel-card {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.channel-card:hover {
+    background-color: #272727;
+}
+
+.channel-main-link {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-grow: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.channel-avatar {
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.channel-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.channel-name {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: #f1f1f1;
+}
+
+.subscribers-count {
+    font-size: 13px;
+    color: #aaa;
+    margin: 0;
+}
+
+/* 
+ * ===================================================================
+ *  4. РЕЖИМ "ВИДЕО"
+ * ===================================================================
+ */
+
+.video-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.video-group-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0 0 24px 0;
+}
+
+.video-group:first-child .video-group-divider {
+    display: none;
+}
+
+.video-group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+}
+
+.channel-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.channel-name-large {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #f1f1f1;
+}
+
+.channel-link:hover .channel-name-large {
+    color: #fff;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.video-list-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s, opacity 0.3s ease, transform 0.3s ease, max-height 0.3s, padding 0.3s, margin 0.3s;
+}
+
+.video-list-item.is-hiding {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.video-list-item:hover {
+    background-color: #272727;
+}
+
+.video-main-link {
+    display: flex;
+    gap: 16px;
+    flex-grow: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+.video-thumbnail-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.video-thumbnail {
+    width: 246px;
+    height: 138px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.video-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+}
+
+.video-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #f1f1f1;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.video-main-link:hover .video-title {
+    color: #fff;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.video-description {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.5;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  5. КОНТЕКСТНЫЕ МЕНЮ 
+ * -------------------------------------------------------------------
+ */
+
+.channel-item-menu-container,
+.video-item-menu-container {
+    flex-shrink: 0;
+    margin-left: auto;
+    position: relative;
+}
+
+.channel-item-menu-button,
+.video-item-menu-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.channel-item-menu-button:hover,
+.video-item-menu-button:hover {
+    background-color: #3f3f3f;
+}
+
+.channel-item-menu-button img,
+.video-item-menu-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  6. УНИКАЛЬНЫЕ ЭЛЕМЕНТЫ UI СТРАНИЦЫ
+ * -------------------------------------------------------------------
+ */
+
+.channel-unsubscribed-message {
+    padding: 24px;
+    border: 1px dashed #3f3f3f;
+    border-radius: 12px;
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+}
+
+.empty-page-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: 24px;
+}
+
+.empty-page-placeholder img {
+    width: 144px;
+    height: 144px;
+    margin-bottom: 24px;
+}
+
+.empty-page-placeholder h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #f1f1f1;
+    margin: 0 0 8px 0;
+}
+
+.empty-page-placeholder p {
+    color: #aaa;
+    font-size: 14px;
+    max-width: 500px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.empty-page-button {
+    display: inline-block;
+    margin-top: 24px;
+    background-color: #fff;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 18px;
+    padding: 10px 24px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.empty-page-button:hover {
+    background-color: #d9d9d9;
+}
+
+
+/* 
+ * -------------------------------------------------------------------
+ *  7. АДАПТИВНОСТЬ
+ * -------------------------------------------------------------------
+ */
+
+@media (max-width: 900px) {
+    .subscriptions-page-container {
+        padding: 16px;
+    }
+    .subscriptions-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-main-link {
+        flex-direction: column;
+    }
+    .video-thumbnail {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+    .channel-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+    }
+    .channel-main-link {
+        gap: 16px;
+        width: 100%;
+    }
+    .channel-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    .channel-item-menu-container {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+    .video-details {
+        padding-top: 8px;
+    }
+}
+/* ------------------------------------------------ */
+/* --- БЛОК 7: Общие стили контекстных меню     --- */
+/* ------------------------------------------------ */
+
+.channel-item-menu,
+.video-item-menu,
+.context-menu-dropdown { 
+    position: absolute;
+    top: 40px; 
+    right: 0;
+    background-color: #282828;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    min-width: 250px;
+    display: none;
+}
+
+.channel-item-menu.opens-upward,
+.video-item-menu.opens-upward,
+.context-menu-dropdown.opens-upward {
+    top: auto;
+    bottom: 40px;
+}
+
+.channel-item-menu.active,
+.video-item-menu.active,
+.context-menu-dropdown.active {
+    display: block; 
+}
+
+.channel-item-menu a,
+.video-item-menu a,
+.context-menu-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.channel-item-menu a:hover,
+.video-item-menu a:hover,
+.context-menu-dropdown a:hover {
+    background-color: #3f3f3f;
+}
+
+.channel-item-menu a img,
+.video-item-menu a img,
+.context-menu-dropdown a img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.notification {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 24px;
+    background-color: #282828;
+    color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+}
+
+.notification.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.notification.error {
+    background-color: #282828; 
+    color: #f1f1f1;
+}
+
+.notification-action {
+    background: none;
+    border: none;
+    color: #3ea6ff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.notification-action:hover {
+    color: #65b8ff;
+    text-decoration: underline;
+}

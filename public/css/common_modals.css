@@ -1,0 +1,592 @@
+/* ------------------------------------------------ */
+/* --- БЛОК 1: Общие оверлеи и контейнеры --- */
+/* ------------------------------------------------ */
+.share-modal-overlay,
+.confirmation-modal-overlay,
+.add-to-playlist-modal-overlay,
+.modal-overlay-small {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.share-modal-overlay.active,
+.confirmation-modal-overlay.active,
+.add-to-playlist-modal-overlay.active,
+.modal-overlay-small.active {
+    display: flex;
+}
+
+.share-modal-content,
+.confirmation-modal-content,
+.add-to-playlist-modal-content,
+.modal-content-small {
+    position: relative;
+    background-color: #282828;
+    border-radius: 12px;
+    width: 90%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f1f1f1; 
+    font-family: 'Roboto', sans-serif; 
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s;
+    z-index: 5;
+}
+
+.modal-close-button:hover {
+    color: #fff;
+}
+
+
+/* ------------------------------------------------ */
+/* --- БЛОК 2: ОКНО ПОДТВЕРЖДЕНИЯ --- */
+/* ------------------------------------------------ */
+
+.confirmation-modal-content {
+    max-width: 420px;
+    padding: 24px 32px;
+    text-align: left;
+}
+
+.confirmation-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.confirmation-modal-body {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+.confirmation-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.confirmation-modal-button {
+    border-style: none;
+    border-radius: 18px;
+    padding: 10px 24px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.confirmation-modal-button.cancel {
+    background: none;
+    color: #3ea6ff;
+}
+
+.confirmation-modal-button.cancel:hover {
+    background-color: rgba(62, 166, 255, 0.1);
+}
+
+.confirmation-modal-button.confirm {
+    background-color: #3ea6ff;
+    color: #0f0f0f;
+}
+
+.confirmation-modal-button.confirm:hover {
+    background-color: #65b8ff;
+}
+
+
+/* ------------------------------------------------ */
+/* --- БЛОК 3: Окно "Поделиться" --- */
+/* ------------------------------------------------ */
+
+.share-modal-content {
+    max-width: 500px;
+    padding: 24px 32px;
+}
+
+.share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.share-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.share-modal-close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.share-modal-close:hover {
+    color: #fff;
+}
+
+.share-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.social-link-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #f1f1f1;
+    transition: opacity 0.2s;
+}
+
+.social-link-item:hover {
+    opacity: 0.8;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.social-name {
+    font-size: 13px;
+}
+
+.social-link-item[data-network="twitter"] .social-icon {
+    transform: scale(1.15);
+}
+
+.social-link-item[data-network="telegram"] .social-icon {
+    transform: scale(1.10);
+}
+
+.share-link-container {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    border: 1px solid #3f3f3f;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.share-link-input {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    color: #f1f1f1;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.share-copy-button {
+    background-color: #3ea6ff;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 18px;
+    padding: 8px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: background-color 0.2s;
+    font-family: inherit;
+}
+
+.share-copy-button:hover {
+    background-color: #65b8ff;
+}
+
+/* ------------------------------------------------ */
+/* --- БЛОК 4: Окно "Добавить в плейлист" --- */
+/* ------------------------------------------------ */
+
+.add-to-playlist-modal-content {
+    max-width: 400px;
+}
+
+.add-to-playlist-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #3f3f3f;
+}
+
+.add-to-playlist-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.add-to-playlist-modal-close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.add-to-playlist-modal-close:hover {
+    color: #fff;
+}
+
+.playlist-selection-list {
+    padding: 8px 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.playlist-selection-item {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.playlist-selection-item:hover {
+    background-color: #3f3f3f;
+}
+
+.no-playlists-message {
+    padding: 16px 24px;
+    color: #aaa;
+    font-style: italic;
+}
+
+.create-new-playlist-section {
+    border-top: 1px solid #3f3f3f;
+    padding: 8px 0;
+}
+
+.create-new-playlist-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    color: #f1f1f1;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+.create-new-playlist-link:hover {
+    background-color: #3f3f3f;
+}
+
+.create-new-playlist-link img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+
+/* ------------------------------------------------ */
+/* --- БЛОК 5: Маленькие модальные окна (Create Playlist, Login Required) --- */
+/* ------------------------------------------------ */
+
+.modal-content-small {
+    max-width: 400px;
+    padding: 24px;
+    background-color: #212121;
+}
+
+.modal-content-small h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    text-align: left;
+}
+
+.form-group-small {
+    margin-bottom: 20px;
+}
+
+.form-group-small label {
+    display: block;
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.form-group-small input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    background-color: #121212;
+    border: 1px solid #3f3f3f;
+    border-radius: 8px;
+    color: #f1f1f1;
+    font-size: 16px;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-group-small input[type="text"]:focus {
+    border-color: #3ea6ff;
+}
+
+.custom-select-container {
+    position: relative;
+}
+
+.custom-select-button {
+    width: 100%;
+    padding: 12px 14px;
+    background-color: #121212;
+    border: 1px solid #3f3f3f;
+    border-radius: 8px;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-arrow {
+    width: 16px;
+    height: 16px;
+    filter: invert(1);
+    transition: transform 0.3s ease;
+}
+
+.custom-select-container.open .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background-color: #282828;
+    border-radius: 8px;
+    padding: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.custom-select-container.open .custom-select-dropdown {
+    display: block;
+}
+
+.custom-select-option {
+    padding: 12px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #f1f1f1;
+    transition: background-color 0.2s;
+}
+
+.custom-select-option:hover {
+    background-color: #3f3f3f;
+}
+
+/* --- Футер и кнопки в маленьких модалках --- */
+
+.modal-footer-small {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-button-small {
+    border: none;
+    border-radius: 18px;
+    padding: 8px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color .2s;
+}
+
+.modal-button-small.cancel {
+    background-color: transparent;
+    color: #f1f1f1;
+}
+
+.modal-button-small.cancel:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-button-small.create {
+    background-color: #3ea6ff;
+    color: #0f0f0f;
+}
+
+.modal-button-small.create:disabled {
+    background-color: #aaa;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.modal-button-small.create:hover:not(:disabled) {
+    background-color: #65b8ff;
+}
+
+/* --- Стили для окна входа (Login Required) --- */
+
+.login-modal-content {
+    text-align: center;
+}
+
+.login-modal-content h3 {
+    font-size: 22px;
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.login-modal-content .login-modal-text {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+.login-modal-content .login-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.login-modal-actions .modal-button-small {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.login-modal-actions .modal-button-small.create {
+    background-color: #f1f1f1;
+    color: #0f0f0f;
+}
+
+.login-modal-actions .modal-button-small.create:hover {
+    background-color: #dcdcdc;
+}
+
+.login-modal-actions .modal-button-small.secondary {
+    background-color: transparent;
+    color: #f1f1f1;
+    border-color: #3f3f3f;
+}
+
+.login-modal-actions .modal-button-small.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ------------------------------------------------ */
+/* --- БЛОК 6: Стили для уведомлений (Toast) и валидации --- */
+/* ------------------------------------------------ */
+
+.notification {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    padding: 12px 24px;
+    background-color: #282828;
+    color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+}
+
+.notification.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.notification.error {
+    background-color: #c62828;
+    color: #fff;
+}
+
+
+/* --- Стили валидации (сообщения под полем) --- */
+
+.input-wrapper-small {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.form-group-small input.input-error {
+    border-color: #ff5252;
+}
+
+.input-error-message-small {
+    position: absolute;
+    bottom: -20px;
+    left: 5px;
+    color: #ff8a80;
+    font-size: 13px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.input-error-message-small.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,0 +1,378 @@
+/* ==========================================================================
+   1. ГЛОБАЛЬНЫЕ СТИЛИ И АНИМИРОВАННЫЙ ФОН
+   ========================================================================== */
+
+   body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background: linear-gradient(-45deg, #0f0f0f, #1b1432, #0f0f0f, #32142d);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   2. ОСНОВНАЯ ФОРМА И КОНТЕЙНЕР
+   ========================================================================== */
+
+.auth-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 380px; 
+    padding: 50px 30px 40px; 
+    border-radius: 16px;
+    text-align: center;
+    background: rgba(28, 28, 28, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: relative;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+/* ==========================================================================
+   3. ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА (Новое)
+   ========================================================================== */
+
+.lang-switcher {
+    position: absolute;
+    top: 15px; 
+    right: 15px; 
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.lang-switcher a {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lang-switcher a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-switcher a.active {
+    color: #fff;
+    background: linear-gradient(45deg, #007BFF, #3ea6ff);
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   4. ТИПОГРАФИКА
+   ========================================================================== */
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+}
+
+.auth-form p {
+    margin-top: 25px;
+    color: #a0a0a0;
+}
+
+.auth-form a {
+    color: #4fa8ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.auth-form a:hover {
+    color: #81c3ff;
+}
+
+/* ==========================================================================
+   5. ЭЛЕМЕНТЫ ФОРМЫ
+   ========================================================================== */
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px 50px; 
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.auth-form input::placeholder {
+    color: #888;
+}
+
+.auth-form input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: #4fa8ff;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #007BFF, #3ea6ff);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.auth-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.input-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    transition: filter 0.3s ease;
+    filter: invert(1) opacity(0.4);
+    pointer-events: none;
+}
+
+.input-wrapper:focus-within .input-icon {
+    filter: invert(1) opacity(1);
+}
+
+.input-wrapper.is-autofilled .input-icon {
+    filter: invert(0) !important;
+}
+
+/* ==========================================================================
+   6. ПОЛЗУНОК "ЗАПОМНИТЬ МЕНЯ"
+   ========================================================================== */
+
+.remember-me-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.toggle-label {
+    color: #a0a0a0;
+    font-size: 14px;
+    margin-left: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #3ea6ff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   7. СООБЩЕНИЯ И ОШИБКИ
+   ========================================================================== */
+
+.error-message,
+.success-message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.error-message {
+    background: rgba(255, 82, 82, 0.1);
+    border: 1px solid rgba(255, 82, 82, 0.3);
+    color: #ff8a80;
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #81c784;
+}
+
+.input-error-message {
+    position: absolute;
+    bottom: -22px;
+    left: 5px;
+    color: #ff8a80;
+    font-size: 13px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.input-error-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.auth-form input.input-error {
+    border-color: #ff5252;
+}
+
+.input-wrapper:has(input.input-error) .input-icon {
+    filter: brightness(0) saturate(100%) invert(49%) sepia(31%) saturate(2206%) hue-rotate(315deg) brightness(102%) contrast(102%);
+}
+
+.field-error-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: help;
+}
+
+.field-error-icon img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(49%) sepia(31%) saturate(2206%) hue-rotate(315deg) brightness(102%) contrast(102%);
+}
+
+.field-error-icon::after {
+   content: attr(data-tooltip);
+   position: absolute;
+   bottom: 130%;
+   right: 50%;
+   transform: translateX(50%);
+   background-color: #333;
+   color: #ff8a80;
+   padding: 8px 12px;
+   border-radius: 6px;
+   font-size: 13px;
+   line-height: 1.4;
+   width: 260px;
+   text-align: left;
+   opacity: 0;
+   visibility: hidden;
+   transition: opacity 0.3s ease, visibility 0.3s ease;
+   pointer-events: none;
+   z-index: 10;
+   border: 1px solid #ff5252;
+   box-shadow: 0 0 10px rgba(255, 82, 82, 0.3);
+   white-space: pre-line;
+}
+
+.field-error-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================================================
+   8. АДАПТАЦИЯ (Тот самый код, который делает старый дизайн рабочим на мобиле)
+   ========================================================================== */
+
+@media screen and (max-width: 420px) {
+    .auth-page-container {
+        padding: 10px; 
+    }
+    
+    .auth-form {
+        padding: 50px 20px 30px; 
+    }
+    
+    .auth-form input {
+        padding: 12px 15px 12px 45px;
+    }
+    
+    .input-icon {
+        left: 15px;
+    }
+
+    .lang-switcher {
+        top: 10px;
+        right: 10px;
+    }
+}

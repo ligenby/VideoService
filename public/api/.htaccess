@@ -1,0 +1,18 @@
+# Запрет просмотра списка файлов
+Options -Indexes
+# Отключаем угадывание расширений
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /api/
+
+    # Защита чувствительных файлов
+    RewriteRule \.(env|log|git|xml|yml|ini)$ - [F,L]
+
+    # Если файл существует — отдаем его
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    RewriteRule ^(.*)$ controller.php?endpoint=$1 [L,QSA]
+</IfModule>

@@ -1,0 +1,1005 @@
+/* 
+ * -------------------------------------------------------------------
+ *  1. ГЛОБАЛЬНЫЕ СТИЛИ И СКРОЛЛБАР
+ * -------------------------------------------------------------------
+ */
+
+ :root {
+    --bg-main: #0f0f0f;
+    --bg-secondary: #181818;
+    --bg-tertiary: #272727;
+    --text-primary: #f1f1f1;
+    --text-secondary: #aaa;
+    --border-color: #3f3f3f;
+    --accent-blue: #3ea6ff;
+    --error-red: #D32F2F;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  2. МАКЕТ И НАВИГАЦИЯ
+ * -------------------------------------------------------------------
+ */
+
+.back-to-site-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    background: rgba(39, 39, 39, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+.back-to-site-link:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+.back-to-site-link img {
+    width: 20px;
+    height: 20px;
+    filter: invert(70%);
+    transition: filter 0.2s ease;
+}
+.back-to-site-link:hover img {
+    filter: invert(100%);
+}
+
+.main-content-full-width {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 70px;
+}
+
+.profile-edit-container {
+    max-width: 960px;
+    margin: 0 auto 32px auto;
+    padding: 24px;
+}
+
+.profile-edit-container h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+}
+
+
+/* 
+ * -------------------------------------------------------------------
+ *  3. СЕКЦИИ ФОРМЫ И ПОЛЯ ВВОДА
+ * -------------------------------------------------------------------
+ */
+
+.form-section {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.form-section h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 24px 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    padding-bottom: 30px; 
+    position: relative;
+}
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: none;
+    overflow-y: hidden;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.char-counter {
+    font-size: 12px;
+    color: #717171;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  4. ЗАГРУЗКА ИЗОБРАЖЕНИЙ (СЕКЦИЯ ОФОРМЛЕНИЯ)
+ * -------------------------------------------------------------------
+ */
+
+.image-upload-section {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.image-preview-area {
+    flex-shrink: 0;
+}
+
+.image-preview {
+    position: relative;
+    background-color: var(--bg-tertiary);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-preview .image-preview {
+    width: 256px;
+    height: 144px;
+    border-radius: 8px;
+}
+
+.avatar-preview .image-preview {
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+}
+
+.avatar-placeholder {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.image-preview:hover .avatar-placeholder {
+    opacity: 1;
+}
+.image-preview.has-placeholder .avatar-placeholder {
+    display: flex;
+    opacity: 1;
+    background-color: transparent;
+}
+.avatar-placeholder img {
+    width: 30%;
+    height: 30%;
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.upload-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.upload-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+.image-upload-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    max-width: 450px;
+}
+.image-upload-description strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.upload-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.upload-button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.2s;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.preview-toggle-button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.2s;
+    background-color: transparent;
+    color: var(--text-secondary);
+    margin-top: -4px; 
+}
+.upload-button {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+.upload-button:hover { background-color: #3f3f3f; }
+.preview-toggle-button {
+    background-color: transparent;
+    color: var(--text-secondary);
+}
+.preview-toggle-button:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+input[type="file"] {
+    display: none;
+}
+input[type="file"]:focus-visible + label {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+.preview-placeholder-icon {
+    display: none;
+    width: 64px;
+    height: 64px;
+    filter: invert(0.5);
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.image-preview.has-placeholder .preview-placeholder-icon {
+    display: block;
+}
+
+.image-preview:hover .preview-placeholder-icon {
+    opacity: 0.7;
+    transform: scale(1.05);
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  5. БЛОК ПРЕДПРОСМОТРА
+ * -------------------------------------------------------------------
+ */
+
+.live-preview-container {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s, padding-top 0.5s;
+}
+.live-preview-container.visible {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.live-preview-wrapper { overflow: hidden; }
+.channel-banner-preview {
+    width: 100%;
+    height: 160px;
+    background-color: var(--bg-tertiary);
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+.profile-header-preview {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: -50px;
+    padding: 0 8px;
+}
+.profile-info-preview {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+.profile-avatar-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 6px solid var(--bg-secondary);
+    flex-shrink: 0;
+}
+.profile-text-preview h1 {
+    font-size: 24px;
+    margin: 0 0 4px;
+    padding: 0;
+    font-weight: 700;
+}
+.profile-meta-preview {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 12px;
+    padding-bottom: 8px;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  6. URL КАНАЛА, БЛОКИРОВКА ПОЛЕЙ И ПОДСКАЗКИ
+ * -------------------------------------------------------------------
+ */
+
+.input-description {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
+    margin: 4px 0 12px 0;
+}
+.channel-url-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+.channel-url-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 16px;
+}
+.copy-url-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+}
+.copy-url-button img {
+    width: 20px;
+    height: 20px;
+    filter: invert(70%);
+    transition: filter 0.2s, transform 0.2s;
+}
+.copy-url-button:hover img {
+    filter: invert(100%);
+    transform: scale(1.1);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.info-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: help;
+    display: flex;
+    align-items: center;
+}
+.info-icon img {
+    width: 20px;
+    height: 20px;
+    filter: invert(50%);
+}
+
+.tooltip {
+    position: absolute;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 100;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.form-group.is-locked label { color: #717171; }
+.form-group.is-locked .input-description { color: #666; }
+.input-with-icon input:disabled {
+    background-color: var(--bg-tertiary);
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  7. СТИЛИ ВАЛИДАЦИИ И ОШИБОК
+ * -------------------------------------------------------------------
+ */
+
+.form-group .has-error,
+.form-group.has-error {
+    border-color: var(--error-red) !important;
+}
+.input-error-bubble {
+    color: var(--error-red);
+    font-size: 13px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+}
+.input-error-bubble.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  8. КНОПКИ УПРАВЛЕНИЯ ФОРМОЙ И УВЕДОМЛЕНИЯ
+ * -------------------------------------------------------------------
+ */
+
+.form-actions-static {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+.submit-button,
+.cancel-button {
+    border: none;
+    border-radius: 18px;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.cancel-button {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+.cancel-button:hover { background-color: #3f3f3f; }
+.submit-button {
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
+}
+.submit-button:hover:not(:disabled) { background-color: #65b8ff; }
+.submit-button:disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.copy-toast-notification {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    padding: 12px 24px;
+    background-color: #282828;
+    color: var(--text-primary);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+    pointer-events: none;
+}
+.copy-toast-notification.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+.copy-toast-notification.error {
+    background-color: #4D2A2A;
+    border: 1px solid #713F3F;
+    color: #F2B7B5;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  9. РЕКОМЕНДУЕМЫЕ КАНАЛЫ
+ * -------------------------------------------------------------------
+ */
+
+.add-section-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin-top: 16px;
+}
+.add-section-button:hover {
+    background-color: var(--bg-tertiary);
+    border-color: #555;
+}
+.add-section-button img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.recommendation-section-block {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+.recommendation-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.recommendation-section-header input { flex-grow: 1; }
+.recommendation-section-block input[type="text"] {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+.recommendation-section-block input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.delete-section-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.delete-section-btn:hover { background-color: var(--bg-tertiary); }
+.delete-section-btn img {
+    width: 20px;
+    height: 20px;
+    filter: invert(0.7);
+}
+.delete-section-btn:hover img { filter: invert(1); }
+
+.channel-search-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+.channel-search-input { padding-left: 45px !important; }
+.channel-search-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('/images/search.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: invert(0.5);
+    z-index: 5;
+}
+.channel-suggestions {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background-color: #282828;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    z-index: 20;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.suggestion-item:hover { background-color: #3f3f3f; }
+.suggestion-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.suggestion-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.suggestion-details .name {
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.suggestion-details .username {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.added-channels-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+.added-channel-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-tertiary);
+    padding: 4px 4px 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.added-channel-pill img {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.remove-channel-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background-color 0.2s;
+}
+.remove-channel-btn:hover {
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+.remove-icon-img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1) brightness(1.5);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.remove-channel-btn:hover .remove-icon-img {
+    opacity: 1;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  11. "МАТЕРИАЛЬНЫЕ" ПОЛЯ ВВОДА
+ * -------------------------------------------------------------------
+ */
+
+.form-group-material {
+    position: relative;
+    margin-top: 20px;
+}
+.form-group-material input {
+    width: 100%;
+    padding: 20px 16px 8px 16px;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+.form-group-material label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+.form-group-material input:focus + label,
+.form-group-material input:not(:placeholder-shown) + label {
+    transform: translateY(-10px) scale(0.75);
+    color: var(--accent-blue);
+}
+.form-group-material input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    border-width: 2px;
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  12. РЕДАКТОР ССЫЛОК И ПЕРЕТАСКИВАНИЕ
+ * -------------------------------------------------------------------
+ */
+
+ .add-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin-top: 16px;
+}
+.add-link-button:hover { background-color: rgba(255, 255, 255, 0.2); }
+.add-link-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.add-link-button img {
+    width: 20px;
+    filter: invert(1);
+}
+
+.link-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.link-drag-handle { cursor: grab; flex-shrink: 0; }
+.link-drag-handle:active { cursor: grabbing; }
+.link-drag-handle img {
+    width: 24px;
+    filter: invert(0.5);
+}
+.link-inputs {
+    flex-grow: 1;
+    display: flex;
+    gap: 16px;
+}
+.link-row .form-group-material {
+    margin-top: 0;
+    width: 100%;
+}
+.delete-link-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.delete-link-btn:hover { background-color: var(--bg-tertiary); }
+.delete-link-btn img {
+    width: 20px;
+    filter: invert(0.7);
+}
+.link-inputs.has-error .form-group-material input { border-color: var(--error-red) !important; }
+.link-inputs.has-error .form-group-material input:not(:placeholder-shown) + label { color: var(--error-red) !important; }
+/* 
+ * -------------------------------------------------------------------
+ *  13. ПРОЧИЕ СТИЛИ
+ * -------------------------------------------------------------------
+ */
+
+.scroll-to-preview-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--accent-blue);
+    font-weight: 500;
+    cursor: pointer;
+    vertical-align: baseline;
+}
+
+
+/* 
+ * -------------------------------------------------------------------
+ *  14. АДАПТИВНОСТЬ
+ * -------------------------------------------------------------------
+ */
+
+@media (max-width: 960px) {
+    .profile-edit-container {
+        margin: 24px auto;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-to-site-link {
+        display: none;
+    }
+    .profile-edit-container {
+        margin-top: 24px;
+    }
+    .image-upload-section {
+        flex-direction: column;
+    }
+    .form-actions-static {
+        flex-direction: column-reverse;
+    }
+    .submit-button,
+    .cancel-button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .link-inputs {
+        flex-direction: column;
+    }
+}
+
+/* 
+ * -------------------------------------------------------------------
+ *  15. СТИЛИ ДЛЯ ИКОНОК СОЦ. СЕТЕЙ В ССЫЛКАХ 
+ * -------------------------------------------------------------------
+ */
+
+ .form-group-material.has-icon {
+    position: relative;
+}
+
+.social-icon-preview {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 3;
+    transition: opacity 0.2s ease;
+    opacity: 0.85;
+}
+
+.social-icon-preview.is-default-icon {
+    filter: invert(1);
+    opacity: 0.7;
+    width: 18px; 
+    height: 18px;
+}
+
+.form-group-material.has-icon:focus-within .social-icon-preview {
+    opacity: 1;
+}
+
+.form-group-material.has-icon > input {
+    padding-left: 50px;
+    
+}
+
+.form-group-material.has-icon > label {
+    left: 50px;
+}
