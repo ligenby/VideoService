@@ -49,19 +49,27 @@
 ---
 
 ## Интерфейс платформы
+<details>
+  <summary><b>Показать скриншоты проекта</b> (Нажмите, чтобы развернуть)</summary>
 
-<img width="1919" height="999" alt="image" src="https://github.com/user-attachments/assets/546da8f5-1f1a-4154-8a9d-0d0f5fe29589" />
+  ### Главная страница
+  <img width="100%" alt="Главная страница" src="https://github.com/user-attachments/assets/546da8f5-1f1a-4154-8a9d-0d0f5fe29589" />
 
-<img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/4e578931-8631-4b03-89ff-6c45a2782eab" />
+  ### Просмотр видео
+  <img width="100%" alt="Просмотр видео" src="https://github.com/user-attachments/assets/4e578931-8631-4b03-89ff-6c45a2782eab" />
 
-<img width="1919" height="949" alt="image" src="https://github.com/user-attachments/assets/6bf061ec-c2a5-4e68-a7d0-86513dc147e0" />
+  ### Канал
+  <img width="100%" alt="Канал" src="https://github.com/user-attachments/assets/6bf061ec-c2a5-4e68-a7d0-86513dc147e0" />
 
-<img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/e80a90bb-3a09-4714-9c51-874356d744e2" />
+  ### Профиль
+  <img width="100%" alt="Профиль" src="https://github.com/user-attachments/assets/e80a90bb-3a09-4714-9c51-874356d744e2" />
 
-<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/664d05db-4a10-44fc-a103-55cf38314c5c" />
+  ### Плейлисты
+  <img width="100%" alt="Плейлисты" src="https://github.com/user-attachments/assets/664d05db-4a10-44fc-a103-55cf38314c5c" />
 
-<img width="1919" height="940" alt="image" src="https://github.com/user-attachments/assets/b63f1dce-5dd9-44b3-a4d4-2fe71a5191ee" />
-
+  ### Админ-панель
+  <img width="100%" alt="Админ-панель" src="https://github.com/user-attachments/assets/b63f1dce-5dd9-44b3-a4d4-2fe71a5191ee" />
+</details>
 ---
 
 ## Локальный запуск (Инструкция)
@@ -69,3 +77,49 @@
 1. Клонируйте репозиторий в корневую директорию вашего локального веб-сервера (например, `htdocs` для XAMPP или `domains` для Open Server):
    ```bash
    git clone https://github.com/ligenby/VideoService.git
+   ```
+2. Импорт базы данных (MySQL)
+   1. Для работы платформы необходимо развернуть структуру таблиц и данные. Файл дампа базы данных находится в корне проекта: videoservice.sql.
+   2. Откройте phpMyAdmin (обычно по адресу http://localhost/phpmyadmin).
+   3. Создайте новую базу данных. Назовите её videoservice (рекомендуемая кодировка: utf8mb4_general_ci).
+   4. Выберите созданную базу в левом списке.
+   5. Перейдите на вкладку Импорт (Import) в верхнем меню.
+   6. Нажмите кнопку «Выберите файл» и укажите путь к файлу videoservice.sql в папке проекта.
+   7. Нажмите кнопку Импорт (или Go) внизу страницы.
+3. Настройка Virtual Hosts
+   Если после запуска стили отображаются некорректно, настройте виртуальный хост для правильной маршрутизации.
+   ШАГ 1: Включение модуля в Apache
+   Откройте файл: C:\xampp\apache\conf\httpd.conf
+   Найдите и раскомментируйте строку (уберите # в начале):
+   ```Apache
+   Include conf/extra/httpd-vhosts.conf
+   ```
+   ШАГ 2: Конфигурация VirtualHost
+   Откройте файл: C:\xampp\apache\conf\extra\httpd-vhosts.conf
+   Добавьте в самый конец файла следующий блок:
+   ```Apache
+   <VirtualHost *:80>
+        ServerName videoservice.local
+        DocumentRoot "C:/xampp/htdocs/VideoService/public"
+      <Directory "C:/xampp/htdocs/VideoService/public">
+           Options Indexes FollowSymLinks
+           AllowOverride All
+           Require all granted
+       </Directory>
+   </VirtualHost>
+   ```
+   ШАГ 3: Регистрация домена в Windows (обычно изначально стоит 127.0.0.1 localhost, если так, то шаг пропускайте)
+   1. Запустите Блокнот от имени администратора.
+   2. Откройте файл: C:\Windows\System32\drivers\etc\hosts
+   3. Добавьте в конец файла строку:
+   ```
+   127.0.0.1  videoservice.local
+   ```
+   ШАГ 4: Перезапуск сервера
+   В контрольной панели XAMPP:
+   1. Нажмите Stop напротив модуля Apache.
+   2. Дождитесь остановки и нажмите Start.
+   Теперь проект доступен в браузере по адресу:
+    http://videoservice.local
+---
+Примечание: Если вы используете другие учетные данные для MySQL (не стандартный root без пароля), не забудьте обновить настройки подключения в конфигурационном файле вашего PHP-приложения.
