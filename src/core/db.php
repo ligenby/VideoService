@@ -3,8 +3,8 @@
 date_default_timezone_set('Europe/Moscow');
 
 $host = "localhost";
-$user = "videoservice_user";
-$pass = "lsyN4d";
+$user = "root";
+$pass = "";
 $db   = "videoservice"; 
 
 $conn = new mysqli($host, $user, $pass, $db);
