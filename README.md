@@ -90,7 +90,8 @@ git clone https://github.com/ligenby/VideoService.git
 7) Нажмите кнопку Импорт (или Go) внизу страницы.
 ### 3. Настройка Virtual Hosts
 Если после запуска стили отображаются некорректно, настройте виртуальный хост для правильной маршрутизации.
-# ШАГ 1: Включение модуля в Apache
+
+### ШАГ 1: Включение модуля в Apache
 Откройте файл: **C:\xampp\apache\conf\httpd.conf**
 Найдите и раскомментируйте строку (уберите # в начале):
 
@@ -98,7 +99,7 @@ git clone https://github.com/ligenby/VideoService.git
 Include conf/extra/httpd-vhosts.conf
 ```
 
-# ШАГ 2: Конфигурация VirtualHost
+### ШАГ 2: Конфигурация VirtualHost
 Откройте файл: **C:\xampp\apache\conf\extra\httpd-vhosts.conf**
 Добавьте в самый конец файла следующий блок:
 
@@ -114,7 +115,7 @@ Include conf/extra/httpd-vhosts.conf
    </VirtualHost>
 ```
 
-# ШАГ 3: Регистрация домена в Windows (обычно изначально стоит `# 127.0.0.1 localhost`, если есть — шаг пропускайте)
+### ШАГ 3: Регистрация домена в Windows (обычно изначально стоит `# 127.0.0.1 localhost`, если есть — шаг пропускайте)
 1) Запустите Блокнот от имени администратора.
 2) Откройте файл: C:\Windows\System32\drivers\etc\hosts
 3) Добавьте в конец файла строку:
@@ -123,7 +124,7 @@ Include conf/extra/httpd-vhosts.conf
 127.0.0.1  videoservice.local
 ```
 
-# ШАГ 4: Перезапуск сервера
+### ШАГ 4: Перезапуск сервера
 В контрольной панели XAMPP:
 1) Нажмите Stop напротив модуля Apache.
 2) Дождитесь остановки и нажмите Start.
